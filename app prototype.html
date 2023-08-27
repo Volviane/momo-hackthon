@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoMo Health Wallet</title>
+</head>
+<body>
+  <h1>MoMo Health Wallet</h1>
+  
+  <form id="accountForm">
+    <label for="username">Username: </label>
+    <input type="text" id="username" required><br>
+    <label for="phoneNumber">Phone Number: </label>
+    <input type="tel" id="phoneNumber" required><br>
+    <button type="submit">Create Account</button>
+  </form>
+  
+  <h2>Your MoMo Health Wallet</h2>
+  <p>Balance: <span id="walletBalance">FCFA0</span></p>
+  
+  <form id="depositForm">
+    <label for="depositAmount">Deposit Amount: </label>
+    <input type="number" id="depositAmount" required><br>
+    <button type="submit">Deposit</button>
+  </form>
+  
+  <h2>Partner Healthcare Network</h2>
+  <ul id="partnerNetwork">
+    <!-- Partners will be dynamically added here -->
+  </ul>
+  
+  <h2>Your Savings Goals</h2>
+  <ul id="savingsGoals">
+    <!-- Savings goals will be dynamically added here -->
+  </ul>
+  
+  <script>
+    const accountForm = document.getElementById('accountForm');
+    const depositForm = document.getElementById('depositForm');
+    const walletBalance = document.getElementById('walletBalance');
+    const partnerNetwork = document.getElementById('partnerNetwork');
+    const savingsGoals = document.getElementById('savingsGoals');
+    
+    let balance = 0;
+    
+    accountForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      console.log(`Account created for ${username} with phone number ${phoneNumber}`);
+    });
+    
+    depositForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const depositAmount = parseFloat(document.getElementById('depositAmount').value);
+      balance += depositAmount;
+      walletBalance.textContent = `$${balance.toFixed(2)}`;
+      console.log(`Deposited $${depositAmount} into the wallet. New balance: $${balance.toFixed(2)}`);
+    });
+    
+    // Simulate partner network and savings goals
+    const partners = ['Clinic A', 'Pharmacy B', 'Hospital C'];
+    partners.forEach(partner => {
+      const listItem = document.createElement('li');
+      listItem.textContent = partner;
+      partnerNetwork.appendChild(listItem);
+    });
+    
+    const goals = ['Regular Check-up', 'Dental Cleaning'];
+    goals.forEach(goal => {
+      const listItem = document.createElement('li');
+      listItem.textContent = goal;
+      savingsGoals.appendChild(listItem);
+    });
+  </script>
+</body>
+</html>
